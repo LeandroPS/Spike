@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>Assistente</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="mespeak.js"></script>
+    <script src="annyang.min.js"></script>
+    <script src="jquery.js"></script>
+    <script>
+        meSpeak.loadConfig("mespeak_config.json");
+        meSpeak.loadVoice("voices/pt.json");
+        
+        function speak(texto){
+            $(".quadro").addClass("animado");
+            meSpeak.speak(texto,{}, function(b){
+                $(".quadro").removeClass("animado");
+            });
+        }
+        
+        /*function peneirarFala(json){
+        	var j = json.results
+        	var maior = 0;
+        	for(i=0;i<j.size();i++){
+        		if j[0]
+        	}
+        }*/
+        $(function(){
+        	speak("Olá, meu nome é Hermes e você pode me chamar sempre que precisar de ajuda");
+        
+	        var recognition = new webkitSpeechRecognition();
+					recognition.continuous = true;
+					recognition.interimResults = true;
+					recognition.onresult = function(event) { 
+					  console.log(event.results[0])
+					  
+					}
+					recognition.start();
+        
+            /*var audio = new Audio();
+            audio.src ='http://translate.google.com/translate_tts?ie=utf-8&tl=en&q=Hello%20World.';
+            audio.play();*/
+            
+        	/*if (annyang) {
+            annyang.setLanguage('pt-BR');
+            // Let's define a command.
+            var commands = {
+                'olá': function() { speak("Olá, Leandro, em que posso ajudar?"); },
+                'testando': function(){speak("funcionou?");},
+                '.*': function(texto){console.log(texto);}
+            
+            };
+
+            // Add our commands to annyang
+            annyang.addCommands(commands);
+            annyang.debug();
+            // Start listening.
+            annyang.start();
+        }*/
+        });
+        
+        
+    </script>
+</head>
+<body>
+    <div class="quadro"></div>
+    
+</body>
+</html>
